@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kelton.tooljavafx.HelloController">
+    <bottom>
+        <BorderPane prefHeight="200.0" BorderPane.alignment="CENTER">
+            <bottom>
+                <TextArea fx:id="retArea" prefHeight="140.0" prefWidth="200.0" promptText="这里是·文本区域" BorderPane.alignment="CENTER" />
+            </bottom>
+            <top>
+                <HBox alignment="CENTER" prefHeight="60.0" spacing="30.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="40.0" text="generagte!" fx:id="genBtn"/>
+                        <Button mnemonicParsing="false" prefHeight="40.0" text="copy to colipboard!" fx:id="copyBtn" />
+                    </children>
+                </HBox>
+            </top>
+        </BorderPane>
+    </bottom>
+    <center>
+        <ScrollPane prefHeight="500" prefWidth="800.0" style="-fx-background-color: white; -fx-background: white; -fx-border-color: white;" BorderPane.alignment="CENTER">
+            <content>
+                <VBox alignment="TOP_CENTER" prefWidth="780.0" spacing="15" style="-fx-background-color: white;">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="URL:" />
+                                <TextField fx:id="urlField" prefWidth="400.0" promptText="input url here" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="Http Method:" />
+                                <ComboBox fx:id="httpMethodSelector" prefWidth="200.0" promptText="Select Http Method" />
+                            </children>
+                        </HBox>
+                        <StackPane>
+                            <children>
+                                <HBox fx:id="paramPane" spacing="10.0">
+                                    <children>
+                                        <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="Parameters:" />
+                                        <VBox fx:id="paramContainer" fillWidth="false" minHeight="50.0" spacing="5.0">
+                                            <children>
+
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <HBox fx:id="bodyContainer" prefWidth="500.0" spacing="10.0" visible="false">
+                                    <children>
+                                        <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="Body:" />
+                                        <TextArea fx:id="bodyArea" minHeight="50.0" prefRowCount="2" prefWidth="400.0" wrapText="true">
+                                        </TextArea>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </StackPane>
+
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" layoutX="10.0" layoutY="353.0" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="Cookies:" />
+                                <ComboBox fx:id="cookieSelector" prefWidth="200.0" promptText="Select Cookie Mode" />
+                            </children>
+                        </HBox>
+                        <StackPane>
+                            <children>
+                                <HBox fx:id="cookiePairContainer" spacing="10.0">
+                                    <children>
+                                        <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="" />
+                                        <VBox fx:id="cookiePair" fillWidth="false" minHeight="50.0" spacing="5.0">
+                                            <children>
+
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <HBox fx:id="cookieAreaContainer" prefWidth="500.0" spacing="10.0" visible="false">
+                                    <children>
+                                        <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="" />
+                                        <TextArea fx:id="cookieArea" minHeight="50.0" prefRowCount="2" prefWidth="400.0" wrapText="true">
+                                        </TextArea>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </StackPane>
+
+
+                       <HBox fx:id="headerPane" spacing="10.0">
+                          <children>
+                             <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="Headers:" />
+                             <VBox fx:id="headersContainer" fillWidth="false" minHeight="50.0" spacing="5.0">
+                                <children>
+
+                                </children>
+                             </VBox>
+                          </children>
+                       </HBox>
+
+
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>
