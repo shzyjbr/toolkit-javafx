@@ -18,6 +18,8 @@ import java.util.List;
 
 public class HelloController {
     @FXML
+    public ComboBox<String> detectSSL;
+    @FXML
     private TextField urlField;
 
     @FXML
@@ -72,6 +74,12 @@ public class HelloController {
         items.add("delete");
         httpMethodSelector.setValue("get");
 
+        ObservableList<String> detectSSLItems = detectSSL.getItems();
+        detectSSLItems.add("true");
+        detectSSLItems.add("false");
+        // 默认不检测
+        detectSSL.setValue("false");
+
 //        ObservableList<String> contentTypeSelectorItems = contentTypeSelector.getItems();
 //        contentTypeSelectorItems.add("application/json; charset=UTF-8");
 //        contentTypeSelectorItems.add("text/html; charset=utf-8");
@@ -123,6 +131,7 @@ public class HelloController {
             concateHttpMethod(ret, httpMethodSelector.getValue());
             concateHttpParam(ret, httpMethodSelector.getValue());
             concatHeader(ret);
+            ifDetectSSL(ret, detectSSL.getValue());
 
             concateUrl(ret, urlField.getText());
             retArea.setText(ret.toString());
@@ -138,6 +147,12 @@ public class HelloController {
         });
 
 
+    }
+
+    private void ifDetectSSL(StringBuilder ret, String detectSSL) {
+        if ("false".equals(detectSSL)) {
+            ret.append(" -k");
+        }
     }
 
     private void concatHeader(StringBuilder ret) {
@@ -189,11 +204,11 @@ public class HelloController {
     private void concateHttpMethod(StringBuilder ret, String value) {
         ret.append(" -X");
         switch (value) {
-            case "get" -> ret.append(" get");
-            case "post" -> ret.append(" post");
-            case "put" -> ret.append(" put");
-            case "delete" -> ret.append(" delete");
-            default -> ret.append(" get");
+            case "get" -> ret.append(" GET");
+            case "post" -> ret.append(" POST");
+            case "put" -> ret.append(" PUT");
+            case "delete" -> ret.append(" DELETE");
+            default -> ret.append(" GET");
         }
     }
 

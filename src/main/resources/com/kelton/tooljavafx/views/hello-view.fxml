@@ -15,7 +15,7 @@
     <bottom>
         <BorderPane prefHeight="200.0" BorderPane.alignment="CENTER">
             <bottom>
-                <TextArea fx:id="retArea" prefHeight="140.0" prefWidth="200.0" promptText="这里是·文本区域" BorderPane.alignment="CENTER" />
+                <TextArea fx:id="retArea" prefHeight="140.0" prefWidth="200.0" promptText="这里是·文本区域" BorderPane.alignment="CENTER" wrapText="true"/>
             </bottom>
             <top>
                 <HBox alignment="CENTER" prefHeight="60.0" spacing="30.0" BorderPane.alignment="CENTER">
@@ -42,6 +42,12 @@
                             <children>
                                 <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="Http Method:" />
                                 <ComboBox fx:id="httpMethodSelector" prefWidth="200.0" promptText="Select Http Method" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="170.0" text="Detect SSL:" />
+                                <ComboBox fx:id="detectSSL" prefWidth="200.0" promptText="Select Whether Detect SSL" />
                             </children>
                         </HBox>
                         <StackPane>
