@@ -9,4 +9,6 @@ module com.kelton.tooljavafx {
 
     opens com.kelton.tooljavafx to javafx.fxml;
     exports com.kelton.tooljavafx;
+    exports com.kelton.tooljavafx.component;
+    opens com.kelton.tooljavafx.component to javafx.fxml;
 }

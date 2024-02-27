@@ -1,5 +1,7 @@
 package com.kelton.tooljavafx;
 
+import com.kelton.tooljavafx.component.EditableTable;
+import com.kelton.tooljavafx.component.KeyValueItem;
 import com.kelton.tooljavafx.util.StringUtil;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,9 +18,13 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelloController {
+public class MainController {
     @FXML
     public ComboBox<String> detectSSL;
+
+    @FXML
+    public ComboBox<String> bodyModeSelector;
+
     @FXML
     private TextField urlField;
 
@@ -34,13 +40,15 @@ public class HelloController {
     private VBox headersContainer;
 
     @FXML
-    private HBox bodyContainer;
+    private VBox bodyContainer;
 
     @FXML
     private HBox paramPane;
 
     @FXML
     private TextArea bodyArea;
+    @FXML
+    public HBox bodyFromContainer;
 
     @FXML
     private VBox cookiePair;
@@ -80,6 +88,10 @@ public class HelloController {
         // 默认不检测
         detectSSL.setValue("false");
 
+        ObservableList<String> bodyModeSelectorItems = bodyModeSelector.getItems();
+        bodyModeSelectorItems.add("text");
+        bodyModeSelectorItems.add("table");
+
 //        ObservableList<String> contentTypeSelectorItems = contentTypeSelector.getItems();
 //        contentTypeSelectorItems.add("application/json; charset=UTF-8");
 //        contentTypeSelectorItems.add("text/html; charset=utf-8");
@@ -97,24 +109,16 @@ public class HelloController {
 // 获取comboBox的值
 //        String selectedItem = httpMethodSelector.getSelectionModel().getSelectedItem();
 
-        ObservableList<Node> paramItems = paramContainer.getChildren();
-        for (int i = 0; i < 2; i++) {
-            paramItems.add(new KeyValueItem(i, paramContainer));
-        }
-
-        ObservableList<Node> headersItems = headersContainer.getChildren();
-        for (int i = 0; i < 2; i++) {
-            headersItems.add(new KeyValueItem(i, headersContainer));
-        }
-        ObservableList<Node> cookiesItems = cookiePair.getChildren();
-        for (int i = 0; i < 1; i++) {
-            cookiesItems.add(new KeyValueItem(i, cookiePair));
-        }
-
         httpMethodSelector.setOnAction(event -> {
             String selectedChoice = httpMethodSelector.getValue();
             System.out.println("Selected Choice: " + selectedChoice);
             showHttpMethodArea(selectedChoice);
+        });
+
+        bodyModeSelector.setOnAction(e-> {
+            String selectedChoice = bodyModeSelector.getValue();
+            System.out.println("bodyModeSelector Choice: " + selectedChoice);
+            showBodyArea(selectedChoice);
         });
 
         cookieSelector.setOnAction(e -> {
@@ -124,8 +128,9 @@ public class HelloController {
         });
 
 
+
+
         genBtn.setOnMouseClicked(e -> {
-            System.out.println("gen！");
 
             StringBuilder ret = new StringBuilder("curl");
             concateHttpMethod(ret, httpMethodSelector.getValue());
@@ -147,6 +152,19 @@ public class HelloController {
         });
 
 
+    }
+
+    private void showBodyArea(String selectedChoice) {
+        switch (selectedChoice) {
+            case "text" -> {
+                bodyArea.setVisible(true);
+                bodyFromContainer.setVisible(false);
+            }
+            case "table" -> {
+                bodyArea.setVisible(false);
+                bodyFromContainer.setVisible(true);
+            }
+        }
     }
 
     private void ifDetectSSL(StringBuilder ret, String detectSSL) {
@@ -193,6 +211,7 @@ public class HelloController {
             }
             case "post" -> {
                 ret.append(" -d ");
+                // todo 需要改成兼容两种模式
                 String text = bodyArea.getText();
                 String replaced = text.replaceAll("[\\r\\n\\s]+", "");
                 String s = replaced.replace("\"", "\\\"");

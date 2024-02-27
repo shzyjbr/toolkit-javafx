@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     private static final int CONTAINER_HEIGHT = 600;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), CONTAINER_WIDTH, CONTAINER_HEIGHT);
         stage.setTitle("Toolkit with JavaFX");
         stage.setScene(scene);
